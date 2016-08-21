@@ -24,6 +24,7 @@ html, body {
     height: 100%;
     overflow: hidden;
     background: #ddd;
+    perspective: 1800px;
 
     @at-root {
         .img_figure {
@@ -34,6 +35,14 @@ html, body {
             padding: 40px;
             background: #fff;
             box-sizing: border-box;
+            cursor: pointer;
+            transform-origin: 0 50% 0;
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease-in-out, left 0.6s ease-in-out, top 0.6s ease-in-out;
+
+            &.is-inverse {
+                transform: translate(320px) rotateY(180deg);
+            }
         }
 
         figcaption {
@@ -43,6 +52,69 @@ html, body {
                 margin: 20px 0 0 0;
                 color: #a7a0a2;
                 font-size: 16px;
+            }
+
+            .img-back {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                padding: 50px 40px;
+                overflow: auto;
+                color: #a7a0a2;
+                font-size: 22px;
+                line-height: 1.25;
+                text-align: left;
+                background-color: #fff;
+                box-sizing: border-box;
+                transform: rotateY(180deg) translateZ(1px);
+                backface-visibility: hidden;
+                p {
+                    margin: 0;
+                }
+            }
+        }
+    }
+}
+
+.controller_nav {
+    position: absolute;
+    left: 0;
+    bottom: 30px;
+    z-index: 101;
+    width: 100%;
+
+    text-align: center;
+
+    @at-root {
+        .cont_unit {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            margin: 0 5px;
+            text-align: center;
+            cursor: pointer;
+            background: #aaa;
+            border-radius: 50%;
+            vertical-align: middle;
+            transform: scale(.5);
+            transition: transform 0.6s ease-in-out, background-color 0.3s;
+
+            &.is_center {
+                color: #fff;
+                line-height: 30px;
+                background: #888;
+                transform: scale(1);
+
+                &:after {
+                    content: '正';
+                };
+            }
+
+            &.is_inverse {
+                background: #555;
+                transform: rotateY(180deg);
             }
         }
     }
